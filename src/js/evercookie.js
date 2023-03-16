@@ -234,7 +234,7 @@ try{
   
   
   var defaultOptionMap = {
-    history: true, // CSS history knocking or not .. can be network intensive
+    history: false, // CSS history knocking or not .. can be network intensive
     java: false, // Java applet on/off... may prompt users for permission to run.
     tests: 10,  // 1000 what is it, actually?
     silverlight: false, // you might want to turn it off https://github.com/samyk/evercookie/issues/45,
