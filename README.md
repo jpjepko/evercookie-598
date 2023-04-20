@@ -16,6 +16,7 @@ Below is a table (adapted from the [Evercookie Github](https://github.com/samyk/
 | `lsoData` | Flash local shared objects | :x: | Deprecated |
 | `slData` | Silverlight isolated storage | :x: | IE not tested |
 | N/A | CSS history knocking | :x: | Buggy |
+| `pngData` | Force-cached PNGs | :x: | Backend server required |
 | `etagData` | HTTP ETags | :x: | Backend server required |
 | `cacheData` | Web cache | :x: | Backend server required |
 | N/A | HTTP Strict Transport Security (HSTS) pinning | :x: | Buggy |
