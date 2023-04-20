@@ -26,29 +26,36 @@ Below is a table (adapted from the [Evercookie Github](https://github.com/samyk/
 ### Browsers and Tools Tested
 TODO
 
+
 ### Website Endpoint Evaluator
-TODO
 
 ### Reproducing
-TODO
+
+The steps to reproduce the study are as follows (**TODO: CAN YOU ADD SCREENSHOTS FOR EACH STEP OF THE LIST**):
+
+1. Spin up Docker container and Nginx server
+2. Open browser, turn on any privacy features to test
+3. Visit website endpoint & create the Evercookie
+4. Leave webpage, see what mechanisms persisted
+5. Close browser, see what mechanisms persisted
+6. Repeat for different browsers and features
+
+From there, comparisons between browsers and privacy features can be made by looking at which mechanisms persisted in the different options versus which got properly removed.
 
 ## Literature Review
-TODO
 
 ## Results
-TODO
+
+The whole dataset collected can be found at this [link](googlesheet). Below are some of the interesting trends we found:
 
 ### Vanilla Browsers
-TODO
 
 ### Incognito
-TODO
 
 ### Privacy Extensions
-TODO
 
 ## General Conclusions
-TODO
 
-## Extensions
-TODO
+### Best way to stay private!
+
+## Future Extensions
