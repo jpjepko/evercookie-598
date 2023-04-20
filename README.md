@@ -4,7 +4,7 @@ In the modern day, internet browsers are increasingly advertising their privacy-
 
 ## Methodology
 ### Evercookie
-We first needed a way to measure a feature's privacy, which is a qualitative measure. We selected [Evercookie](https://github.com/samyk/evercookie), created by Samy Kamkar in 2010. Evercookie's goal is ["to identify a client even after they've removed standard cookies."](https://samy.pl/evercookie) Evercookie is able to persist even after manually deleting cookies. It accomplishes this by storing the cookie using as many mechanisms as possible, and if it is able to recover the cookie from one mechanism, it restores the cookie to all other mechanisms that were previously deleted (if there are any).
+We first needed a way to measure a feature's privacy, which is a qualitative measure. We selected [Evercookie](https://github.com/samyk/evercookie), created by Samy Kamkar in 2010. Evercookie Evercookie's goal is ["to identify a client even after they've removed standard cookies" by "produc[ing] extremely persistent cookies in a browser"](https://samy.pl/evercookie) Evercookie is able to persist even after manually deleting cookies. It accomplishes this by storing the cookie using as many mechanisms as possible, and if it is able to recover the cookie from one mechanism, it restores the cookie to all other mechanisms that were previously deleted (if there are any).
 
 #### Mechanisms
 Evercookie (originally) supported 17 mechanisms. There are simpler mechanisms such as standard HTTP cookies (which Evercookie calls `cookieData`), and more sophisticated ones such as HTML5 IndexedDB (`idbData`). Some mechanisms have since been deprecated, such as Flash Local Shared Objects (`lsoData`), as most major browsers ended Flash support in 2021. A similar situation applies to the two Java mechanisms, as the Java Applet API [was deprecated in 2017](https://openjdk.org/jeps/289). We also encountered issues with mechanisms requiring a backend server, so we decided not to test those either. Lastly, the CSS history knocking mechanism is noted to be "network intensive," and crashed the browsers we tested, so we skipped this mechanism as well.
@@ -13,15 +13,21 @@ Below is a table (adapted from the [Evercookie Github](https://github.com/samyk/
 | Name | Long Name | Used | Reason |
 | ---- | --------- | ---- | ------ |
 | `cookieData` | Standard HTTP cookies | :heavy_check_mark: ||
-| `lsoData` | Flash local shared objects | :x: | Flash deprecated |
+| `lsoData` | Flash local shared objects | :x: | Deprecated |
 | `slData` | Silverlight isolated storage | :x: | IE not tested |
-| TODO | CSS history knocking | :x: | Buggy |
+| N/A | CSS history knocking | :x: | Buggy |
 | `etagData` | HTTP ETags | :x: | Backend server required |
 | `cacheData` | Web cache | :x: | Backend server required |
-| TODO | HTTP Strict Transport Security (HSTS) pinning | :x: | TODO |
+| N/A | HTTP Strict Transport Security (HSTS) pinning | :x: | Buggy |
 | `windowData` | window.name caching | :heavy_check_mark: ||
 | `userData` | IE userData storage | :x: | IE not tested |
-| TODO | TODO | TODO | TODO: do the rest of them |
+| `sessionData` | HTML5 session storage | :heavy_check_mark: ||
+| `localData` | HTML5 local storage | :heavy_check_mark: ||
+| `globalData` | HTML5 global storage | :x: | Deprecated |
+| `dbData` | HTML5 database storage | :heavy_check_mark: ||
+| `idbData` | HTML5 IndexedDB | :heavy_check_mark: ||
+| N/A | Java JNLP PersistenceService | :x: | Deprecated |
+| N/A | Java CVE-2013-0422 exploit | :x: | Deprecated |
 
 ### Browsers and Tools Tested
 TODO
