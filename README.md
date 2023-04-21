@@ -1,12 +1,17 @@
 # Testing Privacy on Popular Browsers
+
 ## Project Goals
+
 In the modern day, internet browsers are increasingly advertising their privacy-preserving features, with browsers such as Brave touting themselves as being ["on a mission to protect your privacy online."](https://brave.com/about/) Our project aims to investigate popular browsers' evasiveness against cross-site tracking. We also aim to answer how well some of these tools prevent a website from recognizing returning users to their site, how strong certain identifiers like cookies can be, and what the best combination of privacy and browser settings are to preserve a user's privacy.
 
 ## Methodology
+
 ### Evercookie
+
 We first needed a way to measure a feature's privacy, which is a qualitative measure. We selected [Evercookie](https://github.com/samyk/evercookie), created by Samy Kamkar in 2010. Evercookie Evercookie's goal is ["to identify a client even after they've removed standard cookies" by "produc[ing] extremely persistent cookies in a browser"](https://samy.pl/evercookie) Evercookie is able to persist even after manually deleting cookies. It accomplishes this by storing the cookie using as many mechanisms as possible, and if it is able to recover the cookie from one mechanism, it restores the cookie to all other mechanisms that were previously deleted (if there are any).
 
 #### Mechanisms
+
 Evercookie (originally) supported 17 mechanisms. There are simpler mechanisms such as standard HTTP cookies (which Evercookie calls `cookieData`), and more sophisticated ones such as HTML5 IndexedDB (`idbData`). Some mechanisms have since been deprecated, such as Flash Local Shared Objects (`lsoData`), as most major browsers ended Flash support in 2021. A similar situation applies to the two Java mechanisms, as the Java Applet API [was deprecated in 2017](https://openjdk.org/jeps/289). We also encountered issues with mechanisms requiring a backend server, so we decided not to test those either. Lastly, the CSS history knocking mechanism is noted to be "network intensive," and crashed the browsers we tested, so we skipped this mechanism as well.
 
 Below is a table (adapted from the [Evercookie Github](https://github.com/samyk/evercookie)) of the mechanisms used by Evercookie, and their relation to this project:
@@ -31,21 +36,34 @@ Below is a table (adapted from the [Evercookie Github](https://github.com/samyk/
 | N/A | Java CVE-2013-0422 exploit | :x: | Deprecated |
 
 ### Browsers and Tools Tested
-TODO
 
+We tested all the following browsers on a Windows 10 machine:
+* Chrome 112.0.5615.122
+* Firefox 112.0.1
+* Edge 112.0.1722.48
+* Brave 1.50.121
 
 ### Website Endpoint Evaluator
+
+We also needed a way to test how well each Evercookie mechanisms persists. We ended up using a slightly-modified fork of [Evercookie's demo website](https://github.com/samyk/evercookie/), as it supported Evercookie creation and allowed us to specifically see which mechanisms persisted after each test. We had to modify it to skip all the mechanisms we did not test, and we also had to change the functionality such that cookies are not restored for every new visit to the page. If the site reads the Evercookie from any mechanism, it will attempt to restore it to all available mechanisms, which is undesirable in our case since we want to see what exact mechanisms persisted. From here all the data we needed could be retrieved client-side. Below is what the demo site looks like:
+
+<img src="https://user-images.githubusercontent.com/56266653/233520333-118bbc17-ea88-4e46-a149-de7ebc92f5ec.PNG" height="385" width="402"/>
 
 ### Reproducing
 
 The steps to reproduce the study are as follows (**TODO: CAN YOU ADD SCREENSHOTS FOR EACH STEP OF THE LIST**):
 
 1. Spin up Docker container and Nginx server
+```
+sudo docker compose up -d    # docker-compose.yaml must be in CWD
+```
 2. Open browser, turn on any privacy features to test
 3. Visit website endpoint & create the Evercookie
 4. Leave webpage, see what mechanisms persisted
 5. Close browser, see what mechanisms persisted
 6. Repeat for different browsers and features
+
+![cook](https://user-images.githubusercontent.com/56266653/233521373-3121b38f-a6e3-4abe-a154-f8ee6ffdc725.PNG)
 
 From there, comparisons between browsers and privacy features can be made by looking at which mechanisms persisted in the different options versus which got properly removed.
 
