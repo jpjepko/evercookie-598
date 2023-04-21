@@ -51,7 +51,7 @@ We also needed a way to test how well each Evercookie mechanisms persists. We en
 
 ### Reproducing
 
-The steps to reproduce the study are as follows (**TODO: CAN YOU ADD SCREENSHOTS FOR EACH STEP OF THE LIST**):
+The steps to reproduce the study are as follows:
 
 1. Spin up Docker container and Nginx server
 ```
@@ -126,11 +126,11 @@ While most vanilla browsers did not delete cookies on closing it, there is one e
 
 ![A screenshot of the Tor Browser setting](https://user-images.githubusercontent.com/56266653/233522557-920451b2-0dd5-4d64-a9e4-7de114981bf7.PNG)
 
+Brave, which is built on Chrome, performed similarly to Chrome. The vanilla (non-incognito) version actually performed worse than Chrome, preserving `sessionData` and `windowData` on tab close. We hypothesize Brave caches tab closes and restores all cookies when the site is revisited, including session cookies. More testing is needed to see how long before Brave no longer restores these session cookies. Brave performed slightly better than Chrome in incognito mode, clearing the `localData` mechanism on tab close, whereas Chrome preserves it.
+
 ### Incognito
 
-For incognito (besides Tor Browser since there was no incognito mode available), we found that the results of the browsers were the same across the board. In contrast to vanilla browsers, every browser in incognito mode was able to delete Evercookie on browser close. However, they all similarly failed to stop any mechanisms on page leave besides the session and window data mechanisms. Below are the mechanisms that persisted using Chrome incognito as an example:
-
-As you can see, the bottom row had no mechanisms that persisted, indicating that Evercookie was successfully deleted upon browser close. 
+For incognito (besides Tor Browser since there was no incognito mode available), we found that the results of the browsers were the same across the board. In contrast to vanilla browsers, every browser in incognito mode was able to delete Evercookie on browser close. However, they all similarly failed to stop any mechanisms on page leave besides the session and window data mechanisms. In the table for Chrome incognito (after browser exit) no mechanisms persisted, indicating that Evercookie was successfully deleted upon browser close. 
 
 Interestingly enough, Tor Browser performed identical to Incognito Firefox. Upon further inspection, we found that Tor Browser is actually built on top of Firefox, so the performance similarities makes sense. It is essentially running a customized version of Firefox in incognito mode, but reaps the benefits of using a Tor network to protect against other privacy attacks (e.g., by hiding the user's IP address from the site).
 
