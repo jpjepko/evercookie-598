@@ -82,14 +82,14 @@ Below are the results of testing on each browser:
 | ------- | ------------ | ----------- | ------------- | ------------ | --------- | -------- | -------- | --------- |
 | Tor Browser (initial) | ✔️ | ✔️ | ✔️ | ✔️ | :x: | :x: | :x: | :x: |
 | Tor Browser (after tab leave) | ✔️ | ✔️ | :x: | :x: | :x: | :x: | :x: | :x: |
-| Tor Browser (after browser exit) | ✔️ | ✔️ | :x: | :x: | :x: | :x: | :x: | :x: |
+| Tor Browser (after browser exit) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
 |  |  |  |  |  |  |  |  |  |
 | Chrome (initial) | :x: | ✔️ | ✔️ | ✔️ | :x: | :x: | ✔️ | ✔️ |
 | Chrome (after tab leave) | :x: | ✔️ | :x: | :x: | :x: | :x: | ✔️ | ✔️ |
 | Chrome (after browser exit) | :x: | ✔️ | :x: | :x: | :x: | :x: | ✔️ | ✔️ |
 |  |  |  |  |  |  |  |  |  |
-| Chrome incognito (initial) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
-| Chrome incognito (after tab leave) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
+| Chrome incognito (initial) | :x: | ✔️ | ✔️ | ✔️ | :x: | :x: | ✔️ | ✔️ |
+| Chrome incognito (after tab leave) | :x: | ✔️ | :x: | :x: | :x: | :x: | ✔️ | ✔️ |
 | Chrome incognito (after browser exit) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
 |  |  |  |  |  |  |  |  |  |
 | Firefox (initial) | ✔️ | ✔️ | ✔️ | ✔️ | :x: | :x: | :x: | ✔️ |
@@ -108,9 +108,9 @@ Below are the results of testing on each browser:
 | Edge incognito (after tab leave) | :x: | ✔️ | :x: | :x: | :x: | :x: | ✔️ | ✔️ |
 | Edge incognito (after browser exit) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
 |  |  |  |  |  |  |  |  |  |
-| Brave (initial) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
-| Brave (after tab leave) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
-| Brave (after browser exit) | :x: | :x: | :x: | :x: | :x: | :x: | :x: | :x: |
+| Brave (initial) | :x: | ✔️ | ✔️ | ✔️ | :x: | :x: | ✔️ | ✔️ |
+| Brave (after tab leave) | :x: | ✔️ | ✔️ | ✔️ | :x: | :x: | ✔️ | ✔️ |
+| Brave (after browser exit) | :x: | ✔️ | :x: | :x: | :x: | :x: | ✔️ | ✔️ |
 |  |  |  |  |  |  |  |  |  |
 | Brave incognito (initial) | :x: | ✔️ | ✔️ | ✔️ | :x: | :x: | ✔️ | ✔️ |
 | Brave incognito (after tab leave) | :x: | :x: | :x: | :x: | :x: | :x: | ✔️ | ✔️ |
