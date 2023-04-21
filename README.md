@@ -99,7 +99,9 @@ From the general results, our consensus for the privacy extensions is that Ghost
 ### Best way to stay private!
 The safest way based on the results of the study to keep oneself private is to use a privacy extension like Ghostery that prevents a cookie from being set in the first place. 
 
-However, extensions like Ghostery that rely on an arbitrary guess of whether the underlying JavaScript in the page is malicious could intefere with functionalities of non-malicious scripts, and thus affect the user's smooth experience in the process. As such, if a user does not want to deal with potential blocking of safe JavaScript, using an incognito browser OR Tor Browser should get rid of persistent cookies like Evercookie fairly easily. The only catch is that the user MUST close the browser or Evercookie will continue to persist using its many mechanisms.
+However, extensions like Ghostery that rely on an arbitrary guess of whether the underlying JavaScript in the page is malicious could intefere with functionalities of non-malicious scripts, and thus affect the user's smooth experience in the process. 
+
+As such, if a user does not want to deal with potential blocking of safe JavaScript, using an incognito browser OR Tor Browser should get rid of persistent cookies like Evercookie fairly easily. The only catch is that the user MUST close the browser or Evercookie will continue to persist using its many mechanisms.
 
 It's also important to note this study, and Evercookie's use in general, is a study of the worse case scenario. Most cookies that are set on webpages are not going to be as persistent as Evercookie. However, we believe it's good to look at the severity of what might happen in the case that a person does want to develop a persistent cookie, and for far more malicious purposes in the future.
 
