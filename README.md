@@ -63,11 +63,15 @@ sudo docker compose up -d    # docker-compose.yaml must be in CWD
 5. Close browser, see what mechanisms persisted
 6. Repeat for different browsers and features
 
-![cook](https://user-images.githubusercontent.com/56266653/233521373-3121b38f-a6e3-4abe-a154-f8ee6ffdc725.PNG)
+![A screenshot of the modified Evercookie demo site](https://user-images.githubusercontent.com/56266653/233521373-3121b38f-a6e3-4abe-a154-f8ee6ffdc725.PNG)
+
+Steps 3 and 4 are labeled in the picture accordingly. Steps 5 and 6 both repeat clicking the button labeled (4).
 
 From there, comparisons between browsers and privacy features can be made by looking at which mechanisms persisted in the different options versus which got properly removed.
 
 ## Literature Review
+
+[A similar study](https://faui1-files.cs.fau.de/public/publications/df/df-whitepaper-18.pdf) has been conducted by Jonathan Schmidt of the University of Erlangen-Nuremberg. They tested the persistence of Evercookies on mostly macOS machines by "delet[ing] all cookies with the standard tool the browsers offer and examine if the evercookie can be restored." Their study differs in that we test on Windows 10, and instead of manually deleting cookies (e.g., via the inspect element tool), we tested whether the browsers themselves delete the cookies after a page leave and exit. Their study found persistence only in the `idbData` mechanism with Firefox on macOS.
 
 ## Results
 
@@ -82,7 +86,7 @@ An interesting note here is that session and window mechanisms do get deleted on
 
 While most vanilla browsers did not delete cookies on closing it, there is one exception: Tor Browser. Tor Browser was the only browser that, with default settings, deleted the Evercookie successfully through closing its browser. Upon further inspection, it was found that Tor Browser actually has a setting that allows the user to be able to choose whether or not cookies should be deleted on browser close.
 
-PICTURE OF TOR BROWSER SETTING 
+![A screenshot of the Tor Browser setting](https://user-images.githubusercontent.com/56266653/233522557-920451b2-0dd5-4d64-a9e4-7de114981bf7.PNG)
 
 ### Incognito
 For incognito (besides Tor Browser since there was no incognito mode available), we found that the results of the browsers were the same across the board. In contrast to vanilla browsers, every browser in incognito mode was able to delete Evercookie on browser close. However, they all similarly failed to stop any mechanisms on page leave besides the session and window data mechanisms. Below are the mechanisms that persisted using Chrome incognito as an example:
@@ -96,28 +100,35 @@ Interestingly enough, Tor Browser performed identical to Incognito Firefox. Upon
 ### Privacy Extensions
 In order to expand the project beyond just browsers, we decided to test common privacy extensions a user might add to their browser. We choose these extensions based on what was found to be popular on the Internet or the top search result in extension download stores.
 
-#### The Extensions Tested TODO: FINISH LINKS
-[Privacy Badger](link): a privacy extension that learns to ID and block trackers based on browser history.
-[Cookie Remover](link): an extension that deletes cookies manually through a click of a button.
-[Cookie Autodelete](link): an extension that deletes cookies automatically.
-[Ghostery](link): a privacy extension that blocks common trackers.
+#### Extensions Tested
+
+[Privacy Badger](https://privacybadger.org/): a privacy extension maintained by the [EFF](https://www.eff.org/) that learns to identify and block trackers based on browser history.
+
+[Cookie Remover](https://chrome.google.com/webstore/detail/cookie-remover/kcgpggonjhmeaejebeoeomdlohicfhce?hl=en): an extension that deletes cookies manually through a click of a button.
+
+[Cookie Autodelete](https://chrome.google.com/webstore/detail/cookie-autodelete/fhcgjolkccmbidfldomjliifgaodjagh?hl=en): an extension that deletes cookies automatically.
+
+[Ghostery](https://www.ghostery.com/): a privacy extension that blocks common trackers.
 
 #### The Results TODO: Screenshots?
-**Privacy Badger**: We found that Privacy Badger does not block Evercookie, nor does it block any of its various persistence mechanisms. TODO: FIX??? -> We believe this occurs because Privacy Badger has to learn through browser history, but we were using it fresh without any training. It is possible that if Privacy Badger visited sites that also had Evercookie, it would learn to properly block it.
+**Privacy Badger**: We found that Privacy Badger does not block Evercookie, nor does it block any of its various persistence mechanisms. We believe this occurs because Privacy Badger has to learn through browser history, by identifying scripts that run on many different sites (as they would likely be cross-site tracking scripts), but we were using it fresh without any training. It is possible that if Privacy Badger visited sites that also had Evercookie, it would learn to properly block it.
+
+![A screenshot of the Privacy Badger interface on Firefox](https://user-images.githubusercontent.com/56266653/233523314-db3ef1bd-0748-426d-9d4a-55c2d11f4a9a.PNG)
 
 **Cookie Remover**: Cookie Remover was able to delete the localData and sessionData mechanisms.
 
-**Cookie Autodelete**: In contrast to Cookie Remove, Cookie Autodelete failed to delete any of the persistence mechanisms at all.
+**Cookie Autodelete**: In contrast to Cookie Remove, Cookie Autodelete failed to delete any of the persistence mechanisms at all, whether ran automatically or manually.
 
 **Ghostery**: We found that Ghostery prevented Evercookie from being set in the first place using its malicious script detection software. Thus, since Evercookie is never set, none of the persistence mechanisms work as well.
 
 From the general results, our consensus for the privacy extensions is that Ghostery performed well ahead of the rest being that it was able to stop Evercookie in its entirety. However, further testing may be required to properly judge the rest of the extensions, especially in regards to Privacy Badger.
+
 ## General Conclusions
 
 ### Best way to stay private!
-The safest way based on the results of the study to keep oneself private is to use a privacy extension like Ghostery that prevents a cookie from being set in the first place. 
+The safest way based on the results of the study to keep oneself private is to use a privacy extension like Ghostery that prevents a cookie from being set in the first place.
 
-However, extensions like Ghostery that rely on an arbitrary guess of whether the underlying JavaScript in the page is malicious could intefere with functionalities of non-malicious scripts, and thus affect the user's smooth experience in the process. 
+However, more rigorous testing must be done, especially with regard to obfuscated JS code, as that may be a way to circumvent Ghostery's detection. Extensions like Ghostery that rely on an arbitrary guess of whether the underlying JavaScript in the page is malicious could intefere with functionalities of non-malicious scripts, and thus affect the user's smooth experience in the process.
 
 As such, if a user does not want to deal with potential blocking of safe JavaScript, using an incognito browser OR Tor Browser should get rid of persistent cookies like Evercookie fairly easily. The only catch is that the user MUST close the browser or Evercookie will continue to persist using its many mechanisms.
 
